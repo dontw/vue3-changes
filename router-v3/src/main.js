@@ -1,7 +1,23 @@
-import { createApp } from 'vue';
+import { createApp } from "vue"
+import { createRouter, createWebHashHistory } from "vue-router"
 
-import App from './App.vue';
+import App from "./App.vue"
+import WelcomeScreen from "./pages/WelcomeScreen.vue"
+import UsersList from "./pages/UsersList.vue"
 
-// Add router!
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: [
+    { path: "/", component: WelcomeScreen },
+    { path: "/users", component: UsersList },
+  ],
+})
 
-createApp(App).mount('#app');
+const app = createApp(App)
+
+app.use(router)
+
+router.isReady().then(() => {
+    app.mount("#app")
+})
+
